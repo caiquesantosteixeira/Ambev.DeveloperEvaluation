@@ -9,10 +9,11 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
     public class SaleItem : BaseEntity
     {
-        public int IdSale { get; set; }
-        public int IdProdct { get; set; }
+        public Guid IdSale { get; set; }
+        public Guid IdProdct { get; set; }
         public int PercentualDescount { get; set; }
         public bool Canceled { get; set; }
+        public decimal Quantity { get; set; }
         public Product Product { get; set; } = new Product();
         public Sale Sale { get; set; } = new Sale();
     }

@@ -13,7 +13,6 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public string Email { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
-        public int IdSale { get; set; }
-        public ICollection<Sale> Pedidos { get; set; } = new List<Sale>();
+        public ICollection<Sale> Sales { get; set; } = new List<Sale>();
     }
 }

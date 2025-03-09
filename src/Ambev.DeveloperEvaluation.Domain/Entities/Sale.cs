@@ -13,7 +13,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public decimal Total { get; set; }
         public bool Canceled { get; set; }
         public int IdBranchStore { get; set; }
-        public int IdCustomer { get; set; }
+        public Guid IdCustomer { get; set; }
         public BranchStore BranchStore { get; set; } = new BranchStore();
         public Customer Customer { get; set; } = new Customer();
         public ICollection<SaleItem> SalesItems { get; set; } = [];
