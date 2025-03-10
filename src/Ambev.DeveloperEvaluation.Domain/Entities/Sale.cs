@@ -13,6 +13,10 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public DateTime DateVenda { get; set; }
         public decimal Total { get; set; }
         public bool Canceled { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
+        public string BrancheStoreName { get; set; } = string.Empty;
+        public bool Finalized { get; set; }
+        public decimal Descount { get; set; }
         public Guid IdBranchStore { get; set; }
         public Guid IdCustomer { get; set; }
         [ForeignKey("IdBranchStore")]

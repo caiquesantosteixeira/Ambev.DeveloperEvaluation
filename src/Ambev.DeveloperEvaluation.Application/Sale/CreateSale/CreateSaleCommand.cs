@@ -13,10 +13,9 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
     public class CreateSaleCommand : IRequest<CreateSaleResult>
     {
         public DateTime DateVenda { get; set; }
-        public bool Canceled { get; set; }
         public Guid IdBranchStore { get; set; }
         public Guid IdCustomer { get; set; }
-
+        public bool Finalized { get; set; }
         public ValidationResultDetail Validate()
         {
             var validator = new CreateSaleCommandValidator();

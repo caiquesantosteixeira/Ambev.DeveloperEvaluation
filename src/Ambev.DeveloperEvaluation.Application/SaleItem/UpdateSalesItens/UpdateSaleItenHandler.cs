@@ -44,6 +44,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSalesItens
                 throw new InvalidOperationException($"Sale with Id {command.IdSale} not exists");
 
             var saleIten = _mapper.Map<SaleItem>(command);
+            saleIten.ProductName = existingProduct.Name;
 
             var createdProduct = _salesItemsRepository.Update(saleIten);
             _salesItemsRepository.SaveChanges();

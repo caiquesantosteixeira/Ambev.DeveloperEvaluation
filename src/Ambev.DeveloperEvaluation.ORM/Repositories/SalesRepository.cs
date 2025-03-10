@@ -24,7 +24,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 
         public Sale GetByIdWithIncludes(Guid id) 
         {
-            return _context.Sale.Include(a => a.SalesItems).First(a => a.Id == id);
+            return _context.Sale.Include(a => a.SalesItems).AsNoTracking().First(a => a.Id == id);
         }
     }
 }

@@ -18,6 +18,8 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale
         public Guid IdBranchStore { get; set; }
         public Guid IdCustomer { get; set; }
 
+        public bool Finalized { get; set; }
+
         public ValidationResultDetail Validate()
         {
             var validator = new UpdateSaleCommandValidator();

@@ -26,6 +26,11 @@ public class Program
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
+            builder.Services.AddMvc().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.IncludeFields = true;
+            });
+
             builder.AddBasicHealthChecks();
             builder.Services.AddSwaggerGen();
 

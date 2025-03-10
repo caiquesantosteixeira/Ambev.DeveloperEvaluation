@@ -12,9 +12,10 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
     {
         public Guid IdSale { get; set; }
         public Guid IdProdct { get; set; }
-        public int PercentualDescount { get; set; }
         public bool Canceled { get; set; }
         public decimal Quantity { get; set; }
+        public string ProductName { get; set; } = string.Empty;
+
         [ForeignKey("IdProdct")]
         public Product? Product { get; set; }
         [ForeignKey("IdSale")]

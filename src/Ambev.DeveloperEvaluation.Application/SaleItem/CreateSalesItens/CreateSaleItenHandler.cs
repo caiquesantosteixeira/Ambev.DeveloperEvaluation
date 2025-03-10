@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Application.SalesItens.CreateSalesItens;
+using Ambev.DeveloperEvaluation.Application.Services;
 using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
@@ -38,8 +39,15 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSalesItens
             if (existingSale == null)
                 throw new InvalidOperationException($"Sale with Id {command.IdSale} not exists");
 
+            var oldQuant = _salesItemsRepository.GetQuantItensByProduct(command.IdProdct);
+            var isValidItem = ItemService.ValidateQuantItem(oldQuant, command.Quantity);
+            if (!isValidItem) 
+            {
+                throw new InvalidOperationException($"This Product item Have more than 20 itens");
+            }
 
             var saleIten = _mapper.Map<SaleItem>(command);
+            saleIten.ProductName = existingProduct.Name;
 
             var createdProduct = _salesItemsRepository.Insert(saleIten);
             _salesItemsRepository.SaveChanges();

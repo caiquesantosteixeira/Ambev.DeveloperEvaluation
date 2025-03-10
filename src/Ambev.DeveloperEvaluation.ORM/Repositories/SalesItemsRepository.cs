@@ -15,5 +15,11 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
         {
             _context = context;
         }
+
+        public decimal GetQuantItensByProduct(Guid idProduct) 
+        {
+            var ret = _context.SaleItem.Where(a => a.IdProdct == idProduct).Sum(a => a.Quantity);
+            return ret;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
+﻿using Ambev.DeveloperEvaluation.Application.Services;
+using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
@@ -42,6 +43,15 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale
                 throw new InvalidOperationException($"Customer with Id {command.IdCustomer} not exists");
 
             var sale = _mapper.Map<Sale>(command);
+            sale.BrancheStoreName = existingBranchStore.NameBranch;
+            sale.CustomerName = existingCustomer.Name;
+
+            if (command.Finalized)
+            {
+                var saleWithIncludes = _salesRepository.GetByIdWithIncludes(command.Id);
+                var descount = ItemService.VerifyItens(saleWithIncludes.SalesItems.ToList());
+                sale.Descount = descount;
+            }
 
             var createdProduct = _salesRepository.Update(sale);
             _salesRepository.SaveChanges();

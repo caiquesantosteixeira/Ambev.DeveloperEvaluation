@@ -40,6 +40,8 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
 
             var sale = _mapper.Map<Sale>(command);
 
+            sale.BrancheStoreName = existingBranchStore.NameBranch;
+            sale.CustomerName = existingCustomer.Name;
             var createdProduct = _salesRepository.Insert(sale);
             _salesRepository.SaveChanges();
             var result = _mapper.Map<CreateSaleResult>(createdProduct);
