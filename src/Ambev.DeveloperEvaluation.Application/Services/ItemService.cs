@@ -10,23 +10,6 @@ namespace Ambev.DeveloperEvaluation.Application.Services
 {
     public static class ItemService
     {
-        public static decimal ResolveDiscountItem(decimal oldQuant, decimal newQuant, decimal price)
-        {
-            decimal totalQuant = oldQuant + newQuant;
-
-            if (totalQuant > 10 && totalQuant < 20)
-            {
-                return 20;
-            }
-
-            if (totalQuant >= 4)
-            {
-                return 10;
-            }
-
-            return 0M;
-        }
-
         public static bool ValidateQuantItem(decimal oldQuant, decimal newQuant)
         {
             return (oldQuant + newQuant) <= 20;
@@ -34,7 +17,7 @@ namespace Ambev.DeveloperEvaluation.Application.Services
 
         public static decimal VerifyItens(List<SaleItem> itens) 
         {
-            var joinedByProduct = itens
+            var joinedByProduct = itens.Where(a => !a.Canceled)
            .GroupBy(p => p.IdProdct)
             .ToDictionary(g => g.Key,                     
                           g => g.Sum(a=> a.Quantity));
@@ -52,6 +35,22 @@ namespace Ambev.DeveloperEvaluation.Application.Services
                 return 10;
             }
             return 0;
+        }
+
+        public static decimal GetTotal(List<SaleItem> itens)
+        {
+            var joinedByProduct = itens.Where(a => !a.Canceled).ToList();
+            var total = 0M;
+
+            foreach (var item in joinedByProduct) 
+            {
+                var valor = item.Product.PrecoUnitario;
+                var quantidade = item.Quantity;
+
+                total += (valor * quantidade);
+            }
+
+            return total;
         }
     }
 }

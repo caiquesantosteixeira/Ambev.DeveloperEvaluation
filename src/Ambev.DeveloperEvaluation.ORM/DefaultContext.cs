@@ -1,7 +1,9 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using EntityFrameworkCore.Triggers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Reflection;
 
 namespace Ambev.DeveloperEvaluation.ORM;
@@ -19,6 +21,31 @@ public class DefaultContext : DbContext
 
     public DefaultContext(DbContextOptions<DefaultContext> options) : base(options)
     {
+        Triggers<Sale>.Inserting += entry =>
+        {
+            Console.WriteLine($"Inserting Sale: {entry.Entity.Id}");
+        };
+
+        Triggers<Sale>.Updating += entry =>
+        {
+            Console.WriteLine($"Updating Sale: {entry.Entity.Id}");
+        };
+
+        Triggers<Sale>.Updating += entry =>
+        {
+            if (entry.Entity.Canceled) 
+            {
+                Console.WriteLine($"Sale with id:{entry.Entity.Id} was canceled");
+            }
+        };
+
+        Triggers<SaleItem>.Updating += entry =>
+        {
+            if (entry.Entity.Canceled)
+            {
+                Console.WriteLine($"Sale item with id:{entry.Entity.Id} was canceled");
+            }
+        };
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

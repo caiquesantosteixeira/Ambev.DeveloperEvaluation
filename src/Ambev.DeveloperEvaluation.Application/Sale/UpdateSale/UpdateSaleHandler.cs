@@ -51,6 +51,8 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale
                 var saleWithIncludes = _salesRepository.GetByIdWithIncludes(command.Id);
                 var descount = ItemService.VerifyItens(saleWithIncludes.SalesItems.ToList());
                 sale.Descount = descount;
+                var total = ItemService.GetTotal(saleWithIncludes.SalesItems.ToList());
+                sale.Total = total;
             }
 
             var createdProduct = _salesRepository.Update(sale);

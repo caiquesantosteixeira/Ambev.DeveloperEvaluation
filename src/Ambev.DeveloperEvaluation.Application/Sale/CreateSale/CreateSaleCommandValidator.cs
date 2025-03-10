@@ -12,7 +12,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
         {
             RuleFor(Sale => Sale.IdBranchStore).NotEmpty().NotNull();
             RuleFor(Sale => Sale.IdCustomer).NotEmpty().NotNull();
-            RuleFor(Sale => Sale.DateVenda).LessThan(DateTime.Now).GreaterThan(DateTime.MinValue);
+            RuleFor(Sale => Sale.DateVenda).GreaterThan(DateTime.MinValue);
         }
     }
 }
