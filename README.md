@@ -56,7 +56,13 @@ These business rules define quantity-based discounting tiers and limitations:
    - No discounts allowed for quantities below 4 items
 
 ## Overview
+To generate the project database, you need to run the migration commands
+Add-Migration nameMigration -Project Ambev.DeveloperEvaluation.ORM
+and then
+Update-Database 
+and also have PostgreSQL installed.
 
+About the tables:
 In this project, the user, after being created and logged in, will be able to create a Store followed by its branch and then register a customer.
 Then he can register products and sales, after which he will be able to assign items to this sale.
 After that, with a simple update in the purchase, he can cancel a purchase or not, as well as an update in the purchase items can cancel them.
