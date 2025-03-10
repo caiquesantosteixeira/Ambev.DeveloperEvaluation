@@ -13,5 +13,9 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
         public bool Canceled { get; set; }
         public Guid IdBranchStore { get; set; }
         public Guid IdCustomer { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
+        public string BrancheStoreName { get; set; } = string.Empty;
+        public bool Finalized { get; set; }
+        public decimal Descount { get; set; }
     }
 }

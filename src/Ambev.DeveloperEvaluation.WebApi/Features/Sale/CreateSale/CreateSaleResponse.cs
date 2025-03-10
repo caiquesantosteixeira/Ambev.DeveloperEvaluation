@@ -10,6 +10,8 @@ public class CreateSaleResponse
     public decimal Total { get; set; }
     public bool Canceled { get; set; }
     public bool Finalized { get; set; }
+    public string CustomerName { get; set; } = string.Empty;
+    public string BrancheStoreName { get; set; } = string.Empty;
     public Guid IdBranchStore { get; set; }
     public Guid IdCustomer { get; set; }
 }
