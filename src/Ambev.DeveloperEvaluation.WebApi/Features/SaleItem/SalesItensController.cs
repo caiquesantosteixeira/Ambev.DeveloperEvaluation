@@ -15,7 +15,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItem;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-//[Authorize]
+[Authorize]
 public class SaleItemController : BaseController
 {
     private readonly IMediator _mediator;

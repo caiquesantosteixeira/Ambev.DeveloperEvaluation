@@ -18,7 +18,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.BranchStore;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-//[Authorize]
+[Authorize]
 public class BranchStoreController : BaseController
 {
     private readonly IMediator _mediator;

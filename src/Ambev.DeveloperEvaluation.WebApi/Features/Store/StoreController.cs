@@ -20,7 +20,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Store;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-//[Authorize]
+[Authorize]
 public class StoreController : BaseController
 {
     private readonly IMediator _mediator;

@@ -20,7 +20,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Sale.CreateSale;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-//[Authorize]
+[Authorize]
 public class SaleController : BaseController
 {
     private readonly IMediator _mediator;
