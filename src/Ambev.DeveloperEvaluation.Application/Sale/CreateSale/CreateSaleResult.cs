@@ -11,7 +11,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
         public DateTime DateVenda { get; set; }
         public decimal Total { get; set; }
         public bool Canceled { get; set; }
-        public int IdBranchStore { get; set; }
-        public int IdCustomer { get; set; }
+        public Guid IdBranchStore { get; set; }
+        public Guid IdCustomer { get; set; }
     }
 }

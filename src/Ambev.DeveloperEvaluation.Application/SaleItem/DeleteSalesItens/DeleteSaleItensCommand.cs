@@ -7,6 +7,10 @@ namespace Ambev.DeveloperEvaluation.Application.SalesItens.DeleteSalesItens
 {
     public class DeleteSaleItensCommand : IRequest<DeleteSaleItensResult>
     {
+        public DeleteSaleItensCommand(Guid id)
+        {
+            Id = id;    
+        }
         public Guid Id { get; set; }
        
 

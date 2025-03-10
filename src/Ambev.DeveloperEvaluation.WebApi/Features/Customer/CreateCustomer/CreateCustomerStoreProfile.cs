@@ -11,6 +11,6 @@ public class CreateCustomerStoreProfile : Profile
     public CreateCustomerStoreProfile()
     {
         CreateMap<CreateCustomerRequest, CreateCustomerCommand>();
-        CreateMap<CreateBranchStoreResult, CreateCustomerResponse>();
+        CreateMap<CreateCustomerResult, CreateCustomerResponse>();
     }
 }

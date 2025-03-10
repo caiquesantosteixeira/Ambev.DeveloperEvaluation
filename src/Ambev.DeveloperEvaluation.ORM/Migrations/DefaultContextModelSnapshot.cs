@@ -110,20 +110,14 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("BranchStoreId")
-                        .HasColumnType("uuid");
-
                     b.Property<bool>("Canceled")
                         .HasColumnType("boolean");
-
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateVenda")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("IdBranchStore")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("IdBranchStore")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdCustomer")
                         .HasColumnType("uuid");
@@ -133,9 +127,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchStoreId");
+                    b.HasIndex("IdBranchStore");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("IdCustomer");
 
                     b.ToTable("Sale");
                 });
@@ -158,20 +152,14 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     b.Property<int>("PercentualDescount")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
 
-                    b.Property<Guid>("SaleId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("IdProdct");
 
-                    b.HasIndex("SaleId");
+                    b.HasIndex("IdSale");
 
                     b.ToTable("SaleItem");
                 });
@@ -254,13 +242,13 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 {
                     b.HasOne("Ambev.DeveloperEvaluation.Domain.Entities.BranchStore", "BranchStore")
                         .WithMany("Sales")
-                        .HasForeignKey("BranchStoreId")
+                        .HasForeignKey("IdBranchStore")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Ambev.DeveloperEvaluation.Domain.Entities.Customer", "Customer")
                         .WithMany("Sales")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("IdCustomer")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -273,13 +261,13 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 {
                     b.HasOne("Ambev.DeveloperEvaluation.Domain.Entities.Product", "Product")
                         .WithMany("SalesItems")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("IdProdct")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Ambev.DeveloperEvaluation.Domain.Entities.Sale", "Sale")
                         .WithMany("SalesItems")
-                        .HasForeignKey("SaleId")
+                        .HasForeignKey("IdSale")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

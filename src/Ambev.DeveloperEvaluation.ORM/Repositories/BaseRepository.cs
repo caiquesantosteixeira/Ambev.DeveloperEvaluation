@@ -49,7 +49,10 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
         public TEntity? GetById(Guid id)
         {
             var ret = _dbSet.Find(id);
-            _context.Entry(ret).State = EntityState.Detached;
+            if (ret != null)
+            {
+                _context.Entry(ret).State = EntityState.Detached;
+            }
             return ret;
         }
 

@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,12 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public DateTime DateVenda { get; set; }
         public decimal Total { get; set; }
         public bool Canceled { get; set; }
-        public int IdBranchStore { get; set; }
+        public Guid IdBranchStore { get; set; }
         public Guid IdCustomer { get; set; }
-        public BranchStore BranchStore { get; set; } = new BranchStore();
-        public Customer Customer { get; set; } = new Customer();
+        [ForeignKey("IdBranchStore")]
+        public BranchStore? BranchStore { get; set; }
+        [ForeignKey("IdCustomer")]
+        public Customer? Customer { get; set; }
         public ICollection<SaleItem> SalesItems { get; set; } = [];
     }
 }

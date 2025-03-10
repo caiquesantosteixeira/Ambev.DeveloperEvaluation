@@ -8,8 +8,8 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSalesItens
 {
     public class CreateSaleItenResult
     {
-        public int IdSale { get; set; }
-        public int IdProdct { get; set; }
+        public Guid IdSale { get; set; }
+        public Guid IdProdct { get; set; }
         public int PercentualDescount { get; set; }
         public bool Canceled { get; set; }
         public decimal Quantity { get; set; }

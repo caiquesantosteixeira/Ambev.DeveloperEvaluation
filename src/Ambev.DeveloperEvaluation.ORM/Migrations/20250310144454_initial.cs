@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ambev.DeveloperEvaluation.ORM.Migrations
 {
     /// <inheritdoc />
-    public partial class guidChange : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -102,23 +102,21 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     DateVenda = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Total = table.Column<decimal>(type: "numeric", nullable: false),
                     Canceled = table.Column<bool>(type: "boolean", nullable: false),
-                    IdBranchStore = table.Column<int>(type: "integer", nullable: false),
-                    IdCustomer = table.Column<Guid>(type: "uuid", nullable: false),
-                    BranchStoreId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false)
+                    IdBranchStore = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdCustomer = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sale", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sale_BranchStore_BranchStoreId",
-                        column: x => x.BranchStoreId,
+                        name: "FK_Sale_BranchStore_IdBranchStore",
+                        column: x => x.IdBranchStore,
                         principalTable: "BranchStore",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Sale_Customer_CustomerId",
-                        column: x => x.CustomerId,
+                        name: "FK_Sale_Customer_IdCustomer",
+                        column: x => x.IdCustomer,
                         principalTable: "Customer",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -133,22 +131,20 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     IdProdct = table.Column<Guid>(type: "uuid", nullable: false),
                     PercentualDescount = table.Column<int>(type: "integer", nullable: false),
                     Canceled = table.Column<bool>(type: "boolean", nullable: false),
-                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SaleId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SaleItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SaleItem_Product_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_SaleItem_Product_IdProdct",
+                        column: x => x.IdProdct,
                         principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SaleItem_Sale_SaleId",
-                        column: x => x.SaleId,
+                        name: "FK_SaleItem_Sale_IdSale",
+                        column: x => x.IdSale,
                         principalTable: "Sale",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -160,24 +156,24 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 column: "IdStore");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sale_BranchStoreId",
+                name: "IX_Sale_IdBranchStore",
                 table: "Sale",
-                column: "BranchStoreId");
+                column: "IdBranchStore");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sale_CustomerId",
+                name: "IX_Sale_IdCustomer",
                 table: "Sale",
-                column: "CustomerId");
+                column: "IdCustomer");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SaleItem_ProductId",
+                name: "IX_SaleItem_IdProdct",
                 table: "SaleItem",
-                column: "ProductId");
+                column: "IdProdct");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SaleItem_SaleId",
+                name: "IX_SaleItem_IdSale",
                 table: "SaleItem",
-                column: "SaleId");
+                column: "IdSale");
         }
 
         /// <inheritdoc />

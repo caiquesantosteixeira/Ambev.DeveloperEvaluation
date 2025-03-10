@@ -2,19 +2,19 @@
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Ambev.DeveloperEvaluation.WebApi.Common;
-using Ambev.DeveloperEvaluation.WebApi.Features.Product.CreateProduct;
-using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
-using Ambev.DeveloperEvaluation.WebApi.Features.Product.DeleteProduct;
-using Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
+using Ambev.DeveloperEvaluation.WebApi.Features.SaleItem.CreateSaleItem;
+using Ambev.DeveloperEvaluation.Application.SalesItens.CreateSalesItens;
+using Ambev.DeveloperEvaluation.Application.SalesItens.UpdateSalesItens;
+using Ambev.DeveloperEvaluation.Application.SalesItens.DeleteSalesItens;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Product;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItem;
 
 /// <summary>
 /// Controller for Store Crud
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class ProductController : BaseController
+public class SaleItemController : BaseController
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
@@ -23,70 +23,70 @@ public class ProductController : BaseController
     /// </summary>
     /// <param name="mediator">The mediator instance</param>
     /// <param name="mapper">The AutoMapper instance</param>
-    public ProductController(IMediator mediator, IMapper mapper)
+    public SaleItemController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
         _mapper = mapper;
     }
 
     /// <summary>
-    /// Insert A new Product
+    /// Insert A new SaleItem
     /// </summary>
     /// <param name="request">The authentication request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Authentication token if successful</returns>
     [HttpPost]
-    [ProducesResponseType(typeof(ApiResponseWithData<CreateProductResponse>), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ApiResponseWithData<CreateSaleItemResponse>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateCustomer([FromBody] CreateSaleItemRequest request, CancellationToken cancellationToken)
     {
-        var validator = new CreateProductRequestValidator();
+        var validator = new CreateSaleItemRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<CreateProductCommand>(request);
+        var command = _mapper.Map<CreateSaleItensCommand>(request);
         var response = await _mediator.Send(command, cancellationToken);
 
-        return Created(string.Empty, new ApiResponseWithData<CreateProductResponse>
+        return Created(string.Empty, new ApiResponseWithData<CreateSaleItemResponse>
         {
             Success = true,
-            Message = "Product created successfully",
-            Data = _mapper.Map<CreateProductResponse>(response)
+            Message = "SaleItem created successfully",
+            Data = _mapper.Map<CreateSaleItemResponse>(response)
         });
     }
 
     /// <summary>
-    /// Update a Product
+    /// Update a SaleItem
     /// </summary>
     /// <param name="request">The authentication request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Authentication token if successful</returns>
     [HttpPut]
-    [ProducesResponseType(typeof(ApiResponseWithData<UpdateProductResponse>), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ApiResponseWithData<UpdateSaleItemResponse>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateCustomer([FromBody] UpdateSaleItemRequest request, CancellationToken cancellationToken)
     {
-        var validator = new UpdateProductRequestValidator();
+        var validator = new UpdateSaleItemValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<UpdateProductCommand>(request);
+        var command = _mapper.Map<UpdateSaleItensCommand>(request);
         var response = await _mediator.Send(command, cancellationToken);
 
-        return Created(string.Empty, new ApiResponseWithData<UpdateProductResponse>
+        return Created(string.Empty, new ApiResponseWithData<UpdateSaleItemResponse>
         {
             Success = true,
-            Message = "Product updated successfully",
-            Data = _mapper.Map<UpdateProductResponse>(response)
+            Message = "SaleItem updated successfully",
+            Data = _mapper.Map<UpdateSaleItemResponse>(response)
         });
     }
 
     /// <summary>
-    /// Deletes a Product by their ID
+    /// Deletes a SaleItem by their ID
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -95,22 +95,22 @@ public class ProductController : BaseController
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteProduct([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteCustomer([FromRoute] Guid id, CancellationToken cancellationToken)
     {
-        var request = new DeleteProductRequest { Id = id };
-        var validator = new DeleteProductRequestValidator();
+        var request = new DeleteSaleItemRequest { Id = id };
+        var validator = new DeleteSalteItemRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<DeleteProductCommand>(request.Id);
+        var command = _mapper.Map<DeleteSaleItensCommand>(request.Id);
         await _mediator.Send(command, cancellationToken);
 
         return Ok(new ApiResponse
         {
             Success = true,
-            Message = "Product deleted successfully"
+            Message = "SaleItem deleted successfully"
         });
     }
 }
