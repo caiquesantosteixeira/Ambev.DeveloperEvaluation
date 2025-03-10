@@ -39,18 +39,9 @@ namespace Ambev.DeveloperEvaluation.Application.Services
 
         public static decimal GetTotal(List<SaleItem> itens)
         {
-            var joinedByProduct = itens.Where(a => !a.Canceled).ToList();
-            var total = 0M;
-
-            foreach (var item in joinedByProduct) 
-            {
-                var valor = item.Product.PrecoUnitario;
-                var quantidade = item.Quantity;
-
-                total += (valor * quantidade);
-            }
-
-            return total;
+            return itens
+                .Where(item => !item.Canceled && item.Product != null) 
+                .Sum(item => item.Product.PrecoUnitario * item.Quantity); 
         }
     }
 }
