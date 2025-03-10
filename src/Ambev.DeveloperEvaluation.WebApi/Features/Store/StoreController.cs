@@ -11,6 +11,7 @@ using Ambev.DeveloperEvaluation.Application.Stores.UpdateStore;
 using Ambev.DeveloperEvaluation.WebApi.Features.Store.CreateUser;
 using Ambev.DeveloperEvaluation.WebApi.Features.Store.CreateStore;
 using Ambev.DeveloperEvaluation.Application.Stores.CreateStore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Store;
 
@@ -19,6 +20,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Store;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+//[Authorize]
 public class StoreController : BaseController
 {
     private readonly IMediator _mediator;

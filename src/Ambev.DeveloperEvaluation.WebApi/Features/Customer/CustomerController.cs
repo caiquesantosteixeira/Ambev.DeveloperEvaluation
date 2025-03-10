@@ -13,6 +13,7 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Customer.UpdateCustomer;
 using Ambev.DeveloperEvaluation.Application.Customers.UpdateCustomer;
 using Ambev.DeveloperEvaluation.WebApi.Features.Customer.DeleteCustomer;
 using Ambev.DeveloperEvaluation.Application.Customers.DeleteCustomer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Customer;
 
@@ -21,6 +22,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Customer;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+//[Authorize]
 public class CustomerController : BaseController
 {
     private readonly IMediator _mediator;

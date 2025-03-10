@@ -6,6 +6,7 @@ using Ambev.DeveloperEvaluation.WebApi.Features.SaleItem.CreateSaleItem;
 using Ambev.DeveloperEvaluation.Application.SalesItens.CreateSalesItens;
 using Ambev.DeveloperEvaluation.Application.SalesItens.UpdateSalesItens;
 using Ambev.DeveloperEvaluation.Application.SalesItens.DeleteSalesItens;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItem;
 
@@ -14,6 +15,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItem;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+//[Authorize]
 public class SaleItemController : BaseController
 {
     private readonly IMediator _mediator;

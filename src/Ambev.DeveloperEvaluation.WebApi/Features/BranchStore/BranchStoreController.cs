@@ -9,6 +9,7 @@ using Ambev.DeveloperEvaluation.WebApi.Features.BranchStore.CreateBranchStore;
 using Ambev.DeveloperEvaluation.Application.BranchStores.CreateBranchStore;
 using Ambev.DeveloperEvaluation.WebApi.Features.BranchStore.UpdateBranchStore;
 using Ambev.DeveloperEvaluation.Application.BranchStores.UpdateBranchStore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.BranchStore;
 
@@ -17,6 +18,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.BranchStore;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+//[Authorize]
 public class BranchStoreController : BaseController
 {
     private readonly IMediator _mediator;

@@ -11,6 +11,7 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sale.GetSale;
 using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.Application.Sales.GetAllSales;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Sale.CreateSale;
 
@@ -19,6 +20,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Sale.CreateSale;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+//[Authorize]
 public class SaleController : BaseController
 {
     private readonly IMediator _mediator;
