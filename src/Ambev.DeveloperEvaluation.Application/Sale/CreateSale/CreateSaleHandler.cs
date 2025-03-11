@@ -42,6 +42,9 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
 
             sale.BrancheStoreName = existingBranchStore.NameBranch;
             sale.CustomerName = existingCustomer.Name;
+            sale.Canceled = false;
+            sale.Finalized = false;
+
             var createdProduct = _salesRepository.Insert(sale);
             _salesRepository.SaveChanges();
             var result = _mapper.Map<CreateSaleResult>(createdProduct);

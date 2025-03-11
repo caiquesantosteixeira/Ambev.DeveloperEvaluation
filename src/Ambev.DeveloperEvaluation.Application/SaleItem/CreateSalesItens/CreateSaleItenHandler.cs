@@ -48,8 +48,9 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSalesItens
 
             var saleIten = _mapper.Map<SaleItem>(command);
             saleIten.ProductName = existingProduct.Name;
+            saleIten.Canceled = false;
 
-            var createdProduct = _salesItemsRepository.Insert(saleIten);
+           var createdProduct = _salesItemsRepository.Insert(saleIten);
             _salesItemsRepository.SaveChanges();
             var result = _mapper.Map<CreateSaleItenResult>(createdProduct);
             return result;
